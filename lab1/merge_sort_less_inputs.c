@@ -1,6 +1,9 @@
-// Merges two subarrays of arr[].
+ // Merges two subarrays of arr[].
 // First subarray is arr[l..m]
 // Second subarray is arr[m+1..r]
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 void merge(int arr[], int l, int m, int r)
 {
     int i, j, k;
@@ -85,15 +88,37 @@ void printArray(int A[], int size)
 /* Driver program to test above functions */
 int main()
 {
-    int arr[] = {12, 11, 13, 5, 6, 7};
-    int arr_size = sizeof(arr)/sizeof(arr[0]);
-  
-    printf("Given array is \n");
-    printArray(arr, arr_size);
-  
-    mergeSort(arr, 0, arr_size - 1);
-  
+    int n;
+
+    // Ask the user how many random inputs they want
+    printf("Enter the number of random inputs: ");
+    scanf("%d", &n);
+
+    // Generate random array with 'n' elements
+    int *arr = (int *)malloc(n * sizeof(int));
+    srand(time(0)); // Seed for random number generation
+
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand() % 10000; // You can adjust the range of random numbers as needed
+    }
+
+    printf("Generated random array is \n");
+    printArray(arr, n);
+
+    // Measure the time taken by the sorting algorithm
+    clock_t start_time = clock();
+
+    mergeSort(arr, 0, n - 1);
+
+    clock_t end_time = clock();
+    double cpu_time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
     printf("\nSorted array is \n");
-    printArray(arr, arr_size);
+    printArray(arr, n);
+
+    printf("\nTime taken: %f seconds\n", cpu_time_used);
+
+    // Free dynamically allocated memory
+    free(arr);
+
     return 0;
 }
