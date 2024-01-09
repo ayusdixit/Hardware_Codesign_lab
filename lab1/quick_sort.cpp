@@ -62,12 +62,38 @@ void printArray(int arr[], int size)
 } 
 
 // Driver Code
+
 int main() 
-{ 
-    int arr[] = {10, 7, 8, 90, 1, 50, 89, 67, 56, 20}; 
-    int n = sizeof(arr) / sizeof(arr[0]); 
-    quickSort(arr, 0, n - 1); 
+{
+    int size;
+    cout << "Enter the size of the array: ";
+    cin >> size;
+
+    // Dynamic memory allocation for the array
+    int* arr = new int[size];
+
+    // Fill the array with random numbers
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 10000; // Adjust the range as needed
+    }
+
+    // Record start time
+    clock_t start_time = clock();
+
+    quickSort(arr, 0, size - 1); 
+
+    // Record end time
+    clock_t end_time = clock();
+
     cout << "Sorted array: \n"; 
-    printArray(arr, n); 
+    printArray(arr, size); 
+
+    // Calculate and print the execution time
+    double elapsed_time = double(end_time - start_time) / CLOCKS_PER_SEC;
+    cout << "Execution Time: " << elapsed_time << " seconds" << endl;
+
+    // Release the dynamically allocated memory
+    delete[] arr;
+
     return 0; 
-} 
+}
