@@ -17,9 +17,12 @@ file helloworld-x86_64
 ```
 ## Setup for 32-bit ARM
 ```bash
-sudo apt install qemu-system-arm qemu
 arm-linux-gnueabi-gcc helloworld.c -o helloworld-arm -static
 file helloworld-arm
 readelf -h helloworld-arm
-qemu-arm helloworld-arm
+
+sudo apt install qemu-system-arm qemu
+arm-linux-gnueabihf-gcc -static -o hello hello.c
+qemu-arm hello
+
 ````
