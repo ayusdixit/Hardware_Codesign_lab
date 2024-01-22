@@ -1,0 +1,15 @@
+ Enter the number of inputs (N): 6
+Enter input 1: 10
+Enter input 2: 11
+Enter input 3: 12
+Enter input 4: 13
+Enter input 5: 14
+Enter input 6: 15
+averge:13Enter value for P (between 500 to 2500): 1000
+Enter value for Q (between 1000 to 5000): 2000 
+Elapsed time: 217 ns
+Final Average after two iterations: 1
+
+
+...Program finished with exit code 0
+Press ENTER to exit console.
