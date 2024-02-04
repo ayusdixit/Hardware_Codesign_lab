@@ -10,12 +10,12 @@ input rst_n,
     input wire [7:0] input_6,
     input wire [7:0] input_7,
     input wire [7:0] input_8,
-    output reg [7:0] average
+    output reg [31:0] average
 );
 
 reg [15:0] sum;
 
-always @(posedge clk or posedge rst_n) begin
+always @(posedge clk) begin
     if (!rst_n) begin
         sum <= 0;
         average <= 0;
@@ -27,4 +27,3 @@ always @(posedge clk or posedge rst_n) begin
 end
 
 endmodule
-
