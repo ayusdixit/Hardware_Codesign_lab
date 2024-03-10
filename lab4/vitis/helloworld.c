@@ -9,7 +9,11 @@ int A[] = {10, 30, 60, 80, 50, 60, 70 , 40}; // 400 total   ,  average = 50 , ma
 
 XGpio_Config *gpio_config;
 XGpio gpio;
+int *din1  ;
+ int *din2 ;
 
+int *data_out  ;
+int *farzi ;
 void gpio_init() {
     gpio_config = XGpio_LookupConfig(XPAR_AXI_GPIO_0_DEVICE_ID);
     int status = XGpio_CfgInitialize(&gpio, gpio_config, gpio_config->BaseAddress);
@@ -46,6 +50,14 @@ int main() {
 
     XGpio_SetDataDirection(&gpio, 2, 0xffffffff); // Channel 2 as Input
     XGpio_SetDataDirection(&gpio, 1, 0x00000000); // Channel 1 as Output
+      din1= XPAR_MYIP_0_S00_AXI_BASEADDR ;
+      din2= XPAR_MYIP_0_S00_AXI_BASEADDR+4 ;
+      data_out = XPAR_MYIP_0_S00_AXI_BASEADDR+8 ;
+      farzi= XPAR_MYIP_0_S00_AXI_BASEADDR+12 ;
+
+       //*din2 = 200 ;   din is the main input of the ip
+
+      xil_printf("result  = %0d  " ,  *farzi);
 
     while(1) {
          dataRead = XGpio_DiscreteRead(&gpio, 2);
@@ -53,7 +65,9 @@ int main() {
          if(dataRead >= 2 && dataRead <= 3) { // Check if dataRead is in the range 2-3
                      xil_printf("Second switch is pressed!\n");
                      int max = max_value(A, ARRAY_SIZE);
+                     *din1 = max ;
                      xil_printf("Max value: %d\n", max);
+                     xil_printf("result  = %0d  " ,  *data_out);
                  }
                  else if(dataRead == 1) {
                      xil_printf("Switch 1 is pressed!\n");

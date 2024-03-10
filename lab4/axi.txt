@@ -1,0 +1,31 @@
+
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+
+int *din1  ;
+ int *din2 ;
+
+int *data_out  ;
+int *farzi ;
+
+int main()
+{
+    init_platform();
+  din1= XPAR_MYIP_0_S00_AXI_BASEADDR ;
+  din2= XPAR_MYIP_0_S00_AXI_BASEADDR+4 ;
+
+
+  data_out = XPAR_MYIP_0_S00_AXI_BASEADDR+8 ;
+  farzi= XPAR_MYIP_0_S00_AXI_BASEADDR+12 ;
+
+
+  *din1 =  50 ;
+   *din2 = 200 ;
+  xil_printf("result  = %0d  " ,  *data_out);
+  xil_printf("result  = %0d  " ,  *farzi);
+    cleanup_platform();
+    return 0;
+}
