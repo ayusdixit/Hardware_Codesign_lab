@@ -57,24 +57,30 @@ int main() {
 
        //*din2 = 200 ;   din is the main input of the ip
 
-      xil_printf("result  = %0d  " ,  *farzi);
-
+      xil_printf("/////////Welcome to the Application ///////////////");
+      xil_printf("\nUART= 9600  ");
     while(1) {
          dataRead = XGpio_DiscreteRead(&gpio, 2);
 
-         if(dataRead >= 2 && dataRead <= 3) { // Check if dataRead is in the range 2-3
+         if(dataRead >= 2 && dataRead <= 3) {
                      xil_printf("Second switch is pressed!\n");
                      int max = max_value(A, ARRAY_SIZE);
                      *din1 = max ;
                      xil_printf("Max value: %d\n", max);
                      xil_printf("result  = %0d  " ,  *data_out);
+                     if(*data_out <10){
+                    	 XGpio_DiscreteWrite(&gpio, 1, 1);
+                     }
+                     else
+                    	 XGpio_DiscreteWrite(&gpio, 1, 15);
+
                  }
                  else if(dataRead == 1) {
                      xil_printf("Switch 1 is pressed!\n");
                       int average = average_value(A, ARRAY_SIZE);
                       xil_printf("Average value: %d\n" , average);
                  }
-                 XGpio_DiscreteWrite(&gpio, 1, dataRead);
+              //   XGpio_DiscreteWrite(&gpio, 1, 9);
                  sleep(1);
              }
     cleanup_platform();
